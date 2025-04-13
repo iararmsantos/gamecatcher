@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxbw1k8h53jtc"]
+
+[ext_resource type="PackedScene" uid="uid://dem0j3hblsa4v" path="res://Scene/Level/Level.tscn" id="1_g3ui7"]
+[ext_resource type="Texture2D" uid="uid://byc0mfkl2qsok" path="res://assets/background/bg4.jpg" id="2_kkbcx"]
+
+[node name="Level4" instance=ExtResource("1_g3ui7")]
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_kkbcx")
+
+[node name="LevelTimer" parent="." index="7"]
+wait_time = 210.0

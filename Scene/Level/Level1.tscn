@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq2qlbgdrjioc"]
+
+[ext_resource type="PackedScene" uid="uid://dem0j3hblsa4v" path="res://Scene/Level/Level.tscn" id="1_ooh8r"]
+
+[node name="Level1" instance=ExtResource("1_ooh8r")]
+
+[node name="LevelTimer" parent="." index="7"]
+wait_time = 30.0

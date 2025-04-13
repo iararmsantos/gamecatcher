@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfbp2bhp323n6"]
+
+[ext_resource type="Texture2D" uid="uid://b4scda7tk5b6c" path="res://assets/ui/panel_beige.png" id="1_b6lf6"]
+[ext_resource type="Script" path="res://Scene/LevelButton/LevelButton.cs" id="2_f1lda"]
+[ext_resource type="LabelSettings" uid="uid://dl6ytg2xovpr5" path="res://assets/resources/title_54_white.tres" id="2_mt3rx"]
+
+[node name="LevelButton" type="TextureButton" node_paths=PackedStringArray("_levelLabel")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(50, 50)
+texture_normal = ExtResource("1_b6lf6")
+script = ExtResource("2_f1lda")
+_levelLabel = NodePath("MarginContainer/VBoxContainer/lb_level")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="lb_level" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "3"
+label_settings = ExtResource("2_mt3rx")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://dem0j3hblsa4v"]
+
+[ext_resource type="Script" path="res://Scene/Level/Level.cs" id="1_68frp"]
+[ext_resource type="PackedScene" uid="uid://b7kplo1u4ljyk" path="res://Scene/Gem/Gem.tscn" id="2_rp7mv"]
+[ext_resource type="Texture2D" uid="uid://c4b5lwxnqn7a" path="res://assets/background/bg1.jpg" id="3_7gf7n"]
+[ext_resource type="PackedScene" uid="uid://b51dco35p204q" path="res://Scene/Paddle/Paddle.tscn" id="5_2arqu"]
+[ext_resource type="AudioStream" uid="uid://54nwds6m4jss" path="res://assets/sound/bgm_action_5.mp3" id="6_hjt2e"]
+[ext_resource type="PackedScene" uid="uid://rfpxbqobsn11" path="res://Scene/Scorer/Scorer.tscn" id="7_0megx"]
+[ext_resource type="AudioStream" uid="uid://dqq02bftexth0" path="res://assets/sound/spell1_0.wav" id="7_di4oi"]
+[ext_resource type="PackedScene" uid="uid://bfq68t70wecp4" path="res://Scene/GameUI/GameUI.tscn" id="7_emrvn"]
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("_spawnTimer", "_music", "_effect", "_gemsHolder")]
+script = ExtResource("1_68frp")
+_gemScene = ExtResource("2_rp7mv")
+_spawnTimer = NodePath("Timer")
+_music = NodePath("Music")
+_effect = NodePath("Effects")
+_gemsHolder = NodePath("GemsHolder")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(578, 315)
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("3_7gf7n")
+
+[node name="Paddle" parent="." instance=ExtResource("5_2arqu")]
+position = Vector2(635, 577)
+_speed = 400.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hjt2e")
+volume_db = -16.0
+autoplay = true
+
+[node name="Effects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_di4oi")
+
+[node name="GemsHolder" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("7_emrvn")]
+
+[node name="LevelTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Scorer" parent="." instance=ExtResource("7_0megx")]

@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfq68t70wecp4"]
+
+[ext_resource type="Script" path="res://Scene/GameUI/GameUi.cs" id="1_2hk27"]
+[ext_resource type="FontFile" uid="uid://yhw4xei6lyu3" path="res://assets/fonts/ComicsCarToon.ttf" id="1_m2vk4"]
+[ext_resource type="AudioStream" uid="uid://dmey6oaavl226" path="res://assets/sound/jazzyfrenchy.mp3" id="2_v3nfp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_guipj"]
+font = ExtResource("1_m2vk4")
+font_size = 36
+font_color = Color(0.981463, 0.987068, 0.998795, 1)
+outline_size = 4
+outline_color = Color(0.175809, 0.177031, 0.239605, 1)
+shadow_size = 8
+shadow_color = Color(0.141176, 0, 0.0313726, 0.286275)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dnq48"]
+font = ExtResource("1_m2vk4")
+font_size = 72
+font_color = Color(0, 0.803922, 0.807843, 1)
+outline_size = 4
+outline_color = Color(0.175809, 0.177031, 0.239605, 1)
+shadow_size = 8
+shadow_color = Color(0.141176, 0, 0.0313726, 0.286275)
+
+[sub_resource type="LabelSettings" id="LabelSettings_77oiq"]
+font = ExtResource("1_m2vk4")
+font_size = 72
+font_color = Color(0.877483, 0.185391, 0.240936, 1)
+outline_size = 4
+outline_color = Color(0.175809, 0.177031, 0.239605, 1)
+shadow_size = 8
+shadow_color = Color(0.141176, 0, 0.0313726, 0.286275)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bi0m"]
+font = ExtResource("1_m2vk4")
+font_size = 54
+font_color = Color(0.981463, 0.987068, 0.998795, 1)
+outline_size = 4
+outline_color = Color(0.175809, 0.177031, 0.239605, 1)
+shadow_size = 8
+shadow_color = Color(0.141176, 0, 0.0313726, 0.286275)
+
+[node name="GameUI" type="Control" node_paths=PackedStringArray("_lifeLabel", "_goalLabel", "_scoreLabel", "_gameOverVBox", "_levelCompleteLabel", "_gameOverLabel", "_gameOverSound")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2hk27")
+_lifeLabel = NodePath("MarginContainer/lb_life")
+_goalLabel = NodePath("MarginContainer/HBScore/lb_goal")
+_scoreLabel = NodePath("MarginContainer/lb_score")
+_gameOverVBox = NodePath("MarginContainer/VBGameOver")
+_levelCompleteLabel = NodePath("MarginContainer/VBGameOver/lb_levelComplete")
+_gameOverLabel = NodePath("MarginContainer/VBGameOver/lb_gameOver")
+_gameOverSound = NodePath("AudioStreamPlayer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBScore" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="lb_goal" type="Label" parent="MarginContainer/HBScore"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "R: 0"
+label_settings = SubResource("LabelSettings_guipj")
+
+[node name="lb_icon" type="TextureRect" parent="MarginContainer/HBScore"]
+layout_mode = 2
+
+[node name="VBGameOver" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="lb_levelComplete" type="Label" parent="MarginContainer/VBGameOver"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LEVEL COMPLETE"
+label_settings = SubResource("LabelSettings_dnq48")
+
+[node name="lb_gameOver" type="Label" parent="MarginContainer/VBGameOver"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_77oiq")
+
+[node name="lb_pressStart" type="Label" parent="MarginContainer/VBGameOver"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PRESS SPACE"
+label_settings = SubResource("LabelSettings_3bi0m")
+
+[node name="lb_life" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Lives: 3"
+label_settings = SubResource("LabelSettings_guipj")
+
+[node name="lb_score" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "0000"
+label_settings = SubResource("LabelSettings_guipj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_v3nfp")
