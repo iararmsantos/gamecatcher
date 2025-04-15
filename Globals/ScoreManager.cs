@@ -39,7 +39,7 @@ public partial class ScoreManager : Node
 
 	//validate if the caught gem type is in gems Goal
 	public static bool GoalContainsGemType(Gem.GemType type) { 
-		GD.Print($"collected gem: {type}");
+		// GD.Print($"collected gem: {type}");
 		return _gemsGoal.ContainsKey(type);
 	}
 
@@ -173,7 +173,7 @@ public partial class ScoreManager : Node
 			string jsonStr = JsonConvert.SerializeObject(_levelScores);
 			file.StoreString(jsonStr);
 		} else {
-			GD.Print("failed to save file");
+			// GD.Print("failed to save file");
 		}
 	}
 
@@ -187,7 +187,7 @@ public partial class ScoreManager : Node
 			_levelScores = JsonConvert.DeserializeObject<List<LevelScore>>(jsonStr);
 		}
 	} else {
-		GD.Print("failed to open file");
+		// GD.Print("failed to open file");
 	}
 }
 

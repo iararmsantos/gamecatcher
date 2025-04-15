@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class Level : Node2D
@@ -77,6 +78,7 @@ public partial class Level : Node2D
 		//create new instance of gem
 		Gem gem = (Gem)_gemScene.Instantiate();
 		Rect2 viewportRect = GetViewportRect();
+		gem.SetSpeed(gem.GetSpeed());
 		
 		//add gem to scene
 		_gemsHolder.AddChild(gem);	
@@ -124,32 +126,106 @@ public partial class Level : Node2D
 	/**
 	 * Handle Different Bonus by Gem Types
 	 */
-	 //TODO: this should be handled by Gem -  removed for tests purpose
     private void HandleBonusGemType()
     {        
-        // Gem lastCollectedGem = GetLastCollectedGem();
-    	// if (lastCollectedGem != null 
-		// 	&& lastCollectedGem.Type == Gem.GemType.Super)
-    	// {
-        // 	// make all bonus action happen
-        // 	GD.Print("Gem is Super");
-
-        // 	// Check if the Game node is still valid before accessing the Paddle node
-        // 	if (IsInstanceValid(this))
-        // 	{
-        //     	// Get the paddle node and activate the magnet
-        //     	Paddle paddle = GetNode<Paddle>("Paddle");
-        //     	if (paddle != null)
-        //     	{
-        //         	paddle.ActivateMagnet();
-        //     	}	
-        // 	}
-    	// }	
+        Gem lastCollectedGem = GetLastCollectedGem();
+    	 if (lastCollectedGem != null)
+        {
+            ValidateGemMagnet(lastCollectedGem);
+            ValidateGemLife(lastCollectedGem);
+            ValidateGemSlow(lastCollectedGem);
+        }
     }
-    
-	/**
+
+    private void ValidateGemSlow(Gem lastCollectedGem)
+    {        
+        if (lastCollectedGem.Type == Gem.GemType.Slow)
+        {
+            // Check if the Game node is still valid before accessing the Paddle node
+            if (IsInstanceValid(this))
+            {
+                // Make gems fall slowly
+                // Get all active gems in the scene
+                var gemNodes = GetTree().GetNodesInGroup("gems");
+				List<Gem> slowedGems = new();
+
+                foreach (Node gemNode in gemNodes)
+                {
+                    // Check if the node is of type Gem
+                    if (gemNode is Gem gem)
+                    {
+                        // Apply slowdown effect to all gems
+                        GD.Print($"Slowing down gem: {gem}");
+                        gem.SlowDown(0.25f); // Apply the slowdown effect (you can adjust the factor as needed)
+						slowedGems.Add(gem);
+                    } else {
+							GD.Print("Could not cast gem to slow down.");
+						}
+                }
+
+                // Reset speed after 5 seconds
+                var timer = new Timer();
+                AddChild(timer);
+                timer.WaitTime = 5.0f;
+                timer.OneShot = true;
+                timer.Timeout += () =>
+                {
+                    foreach (Gem gem in slowedGems)
+                    {
+                        if (IsInstanceValid(gem))
+						{
+							gem.ResetSpeed();
+						}
+                    }
+                    timer.QueueFree();
+                };
+                timer.Start();
+            }
+        }
+    }
+
+
+    private void ValidateGemLife(Gem lastCollectedGem)
+    {
+        // extra life
+        if (lastCollectedGem.Type == Gem.GemType.Life)
+        {
+            // make all bonus action happen
+            // GD.Print("Gem is Life");
+
+            // Check if the Game node is still valid before accessing the Paddle node
+            if (IsInstanceValid(this))
+            {
+                LifeManager.IncrementLives();
+            }
+        }
+    }
+
+
+    private void ValidateGemMagnet(Gem lastCollectedGem)
+    {
+        // if (lastCollectedGem.Type == Gem.GemType.Super)
+        // {
+        //     // make all bonus action happen
+        //     GD.Print("Gem is Super");
+
+        //     // Check if the Game node is still valid before accessing the Paddle node
+        //     if (IsInstanceValid(this))
+        //     {
+        //         // Get the paddle node and activate the magnet
+        //         Paddle paddle = GetNode<Paddle>("Paddle");
+        //         if (paddle != null)
+        //         {
+        //             paddle.ActivateMagnet();
+        //         }
+        //     }
+        // }
+    }
+
+    /**
 	 * Stop actions on GameOver
 	 */
+
     private void OnEndGame()
 	{
 		// stop all nodes and timer	
@@ -161,7 +237,6 @@ public partial class Level : Node2D
 		StopGems();
 		
 		_spawnTimer.Stop();
-		// _levelTimer.Stop();
 		_music.Stop();
 	}
 

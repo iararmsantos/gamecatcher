@@ -40,6 +40,8 @@ public partial class LifeManager : Node
 
 	public static void IncrementLives()
 	{
-		SetLives(GetLives() + 1);
+		if (GetLives() < 3) {
+			SetLives(GetLives() + 1);
+		}		
 	}
 }

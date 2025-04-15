@@ -5,14 +5,13 @@ using System.Collections.Generic;
 public partial class GameUi : Control
 {
 	[Export]private Label _lifeLabel;
-	//TODO: make this a vbox with group label then I can add label dinamically to this vbox depending on the number of goals. Ex. red: 5, green: 2, yellow: 5. 
 	[Export]private Label _goalLabel;
 	[Export]private Label _scoreLabel;
 	[Export]private VBoxContainer _gameOverVBox;
 	[Export]private Label _levelCompleteLabel;
 	[Export]private Label _gameOverLabel;
 
-	//TODO: play a sad game when gameOver and a happy music when GameComplete
+	//TODO: play a sad music when gameOver and a happy music when GameComplete
 	[Export]private AudioStreamPlayer _gameOverSound;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -54,7 +53,7 @@ public partial class GameUi : Control
 			goalText += $"{kvp.Key.ToString()[0]}: {kvp.Value}  ";
         }
 
-		GD.Print(goalText);
+		// GD.Print(goalText);
 		_goalLabel.Text = goalText;
     }
 

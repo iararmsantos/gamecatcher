@@ -80,7 +80,7 @@ public partial class Scorer : Node
 		ScoreManager.SetGemsGoal(_generatedGoal.GemAmounts);
 
 		foreach (var (type, amount) in _generatedGoal.GemAmounts)
-			GD.Print($"Gem: {type}, Amount: {amount}"); 
+			// GD.Print($"Gem: {type}, Amount: {amount}"); 
 
         SignalManager.EmitOnGoalUpdated();  
     }
@@ -102,15 +102,14 @@ public partial class Scorer : Node
 
         int maxGems = level switch
         {
-            1 => 5,
+            1 => 10,
             2 => 20,
             3 => 30,
             4 => 40,
             5 => 50,
             _ => 10
-        };
+        };        
         
-        //TODO: create a variable for the random minimum depending on the level because sometimes we are getting in the level 3 1 gem.
         int numTypes = rng.Next(1, maxTypes + 1);
         //get all types and cast it to Gem.GemType (because GetValues returns a generic Array) and convert it to a list
         var allGemTypes = Enum.GetValues(typeof(Gem.GemType)).Cast<Gem.GemType>().ToList();
@@ -120,8 +119,7 @@ public partial class Scorer : Node
         var gemAmounts = new Dictionary<Gem.GemType, int>();
 
         //generate amount from minGems to maxGems - uncomment this after tests
-        // int minGems = maxGems / 3; //TODO: make this 3 a constant
-        int minGems = maxGems;
+        int minGems = maxGems / 3;        
         int totalGems = rng.Next(minGems, maxGems + 1);
         int remainingGems = totalGems;
 
