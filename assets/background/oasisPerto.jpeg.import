@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4b5lwxnqn7a"
-path="res://.godot/imported/bg1.jpg-6c808cffbc23b9e369405f02d19ad2cd.ctex"
+uid="uid://b0u5xflaputos"
+path="res://.godot/imported/oasisPerto.jpeg-e041d1811b9d1e81a3e13ea46cb1b58f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/bg1.jpg"
-dest_files=["res://.godot/imported/bg1.jpg-6c808cffbc23b9e369405f02d19ad2cd.ctex"]
+source_file="res://assets/background/oasisPerto.jpeg"
+dest_files=["res://.godot/imported/oasisPerto.jpeg-e041d1811b9d1e81a3e13ea46cb1b58f.ctex"]
 
 [params]
 

@@ -111,10 +111,17 @@ public partial class Scorer : Node
         };        
         
         int numTypes = rng.Next(1, maxTypes + 1);
-        //get all types and cast it to Gem.GemType (because GetValues returns a generic Array) and convert it to a list
-        var allGemTypes = Enum.GetValues(typeof(Gem.GemType)).Cast<Gem.GemType>().ToList();
+        //get all types and cast it to Gem.GemType (because GetValues returns a generic Array) and convert it to a list - exclude special types
+        var allGemTypes = Enum.GetValues(typeof(Gem.GemType))
+                      .Cast<Gem.GemType>()
+                      .Where(type => !GemMetadata.IsSpecial(type));
+                      
         //random selection of numTypes gem types, with no duplicates
-        var selectedGemTypes = allGemTypes.OrderBy(_ => rng.Next()).Take(numTypes).ToList();
+        var selectedGemTypes = RandomUtils.PickWeighted(
+            allGemTypes,
+            type => GemMetadata.Info[type].Rarity,
+            numTypes
+        );
 
         var gemAmounts = new Dictionary<Gem.GemType, int>();
 

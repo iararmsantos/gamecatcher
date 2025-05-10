@@ -8,6 +8,11 @@ public partial class Main : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{		
+		var img = ImageManager.GetRandomItemImage();
+		var img2 = ImageManager.GetRandomItemImage();
+		var img3 = ImageManager.GetImage(3);
+		ImageManager.ShuffleImages();
+		var img4 = ImageManager.GetImage(3);
 		_highScoreLabel.Text = $"{ScoreManager.GetHighestScoreOfAllLevels()}";
 	}
 

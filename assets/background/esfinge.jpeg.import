@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg4u6j683ktsl"
-path="res://.godot/imported/bg7.jpg-ad386fd26b8cc760fd98abeae3e067ba.ctex"
+uid="uid://danh5k8w5eu2w"
+path="res://.godot/imported/esfinge.jpeg-a88c37978d66ee746617129d8e1f508c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/bg7.jpg"
-dest_files=["res://.godot/imported/bg7.jpg-ad386fd26b8cc760fd98abeae3e067ba.ctex"]
+source_file="res://assets/background/esfinge.jpeg"
+dest_files=["res://.godot/imported/esfinge.jpeg-a88c37978d66ee746617129d8e1f508c.ctex"]
 
 [params]
 

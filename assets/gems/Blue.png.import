@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5hw0a4rq3dge"
-path="res://.godot/imported/bg8.jpg-5734b2771a357e4f22652bb2875f6210.ctex"
+uid="uid://85kmw0ml4cgy"
+path="res://.godot/imported/Blue.png-bd6352247e2351034f97e7746e65c5ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/bg8.jpg"
-dest_files=["res://.godot/imported/bg8.jpg-5734b2771a357e4f22652bb2875f6210.ctex"]
+source_file="res://assets/gems/Blue.png"
+dest_files=["res://.godot/imported/Blue.png-bd6352247e2351034f97e7746e65c5ce.ctex"]
 
 [params]
 

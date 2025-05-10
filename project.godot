@@ -21,6 +21,7 @@ GameManager="*res://Globals/GameManager.cs"
 SignalManager="*res://Globals/SignalManager.cs"
 ScoreManager="*res://Globals/ScoreManager.cs"
 LifeManager="*res://Globals/LifeManager.cs"
+ImageManager="*res://Globals/ImageManager.cs"
 
 [display]
 

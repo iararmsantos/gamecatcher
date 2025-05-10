@@ -1,12 +1,14 @@
 using Godot;
-using System;
+using System.Linq;
 
 public partial class Gem : Area2D
 {
-	[Export] float originalSpeed = 90.0f;
 	private float fallSpeed = 90.0f;
+	private float originalSpeed;
 
 	private Sprite2D sprite;
+	private Texture2D _textureToApply;
+
 
 	public enum GemType
     {
@@ -22,11 +24,31 @@ public partial class Gem : Area2D
     }
     public GemType Type { get; private set; }
 
+
+	public void Initialize(GemType type, Texture2D texture)
+	{
+		Type = type;
+		_textureToApply = texture;
+		originalSpeed = GemMetadata.Info[type].InitialSpeed;
+		SetSpeed(originalSpeed);
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		sprite = new Sprite2D();		
-        AddChild(sprite);	
+		GD.Print("Children of Gem: " + string.Join(", ", GetChildren().Select(n => n.Name)));
+
+		sprite = GetNode<Sprite2D>("GemSprite");
+
+		if (_textureToApply != null)
+		{
+			sprite.Texture = _textureToApply;
+		}
+		else
+		{
+			GD.PrintErr("No texture was set before Ready().");
+		}
+
 
 		// Add gem to the "gems" group
         AddToGroup("gems");	
@@ -73,30 +95,6 @@ public partial class Gem : Area2D
 
 	/// <summary>
 	/// Reduce the gem speed
-	/// <param name="type"> The gem type.</param>
-	/// </summary>
-	public void SetGemType(GemType type)
-    {
-        Type = type;
-		string texturePath = type switch
-		{
-			GemType.Red => "res://assets/gems/element_red_diamond.png",
-			GemType.Blue => "res://assets/gems/element_blue_diamond.png",
-			GemType.Green => "res://assets/gems/element_green_diamond.png",
-			GemType.Yellow => "res://assets/gems/element_red_diamond.png",
-			GemType.Orange => "res://assets/gems/element_blue_diamond.png",
-			GemType.Black => "res://assets/gems/element_green_diamond.png",
-			GemType.Super => "res://assets/gems/element_blue_diamond.png",
-			GemType.Life => "res://assets/gems/element_red_diamond.png",
-			GemType.Slow => "res://assets/gems/element_green_diamond.png",
-			_ => throw new ArgumentOutOfRangeException(nameof(type), $"Unexpected GemType value: {type}")
-		};
-
-        sprite.Texture = GD.Load<Texture2D>(texturePath);
-    }
-
-	/// <summary>
-	/// Reduce the gem speed
 	/// <param name="multiplier"> How much to slow down.</param>
 	/// </summary>
 	public void SlowDown(float multiplier)
@@ -131,4 +129,14 @@ public partial class Gem : Area2D
 	public float GetSpeed() {
 		return originalSpeed;
 	}
+
+	/// <summary>
+	/// check for special gem types
+	/// <param name="type"> Gem type.</param>
+	/// </summary>
+	/// <returns>The original gem speed.</returns>	
+	public static bool IsSpecial(GemType type)
+    {
+        return type == GemType.Super || type == GemType.Life || type == GemType.Slow;
+    }
 }

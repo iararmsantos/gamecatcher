@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scene/Level/Level.cs" id="1_68frp"]
 [ext_resource type="PackedScene" uid="uid://b7kplo1u4ljyk" path="res://Scene/Gem/Gem.tscn" id="2_rp7mv"]
-[ext_resource type="Texture2D" uid="uid://c4b5lwxnqn7a" path="res://assets/background/bg1.jpg" id="3_7gf7n"]
+[ext_resource type="Texture2D" uid="uid://ctoru3a722xcx" path="res://assets/background/deserto.jpeg" id="3_wbd1p"]
 [ext_resource type="PackedScene" uid="uid://b51dco35p204q" path="res://Scene/Paddle/Paddle.tscn" id="5_2arqu"]
 [ext_resource type="AudioStream" uid="uid://54nwds6m4jss" path="res://assets/sound/bgm_action_5.mp3" id="6_hjt2e"]
 [ext_resource type="PackedScene" uid="uid://rfpxbqobsn11" path="res://Scene/Scorer/Scorer.tscn" id="7_0megx"]
@@ -20,7 +20,7 @@ _gemsHolder = NodePath("GemsHolder")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(578, 315)
 scale = Vector2(1.15, 1.15)
-texture = ExtResource("3_7gf7n")
+texture = ExtResource("3_wbd1p")
 
 [node name="Paddle" parent="." instance=ExtResource("5_2arqu")]
 position = Vector2(635, 577)

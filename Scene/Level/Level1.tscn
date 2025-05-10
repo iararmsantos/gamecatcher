@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq2qlbgdrjioc"]
+[gd_scene load_steps=3 format=3 uid="uid://cq2qlbgdrjioc"]
 
 [ext_resource type="PackedScene" uid="uid://dem0j3hblsa4v" path="res://Scene/Level/Level.tscn" id="1_ooh8r"]
+[ext_resource type="Texture2D" uid="uid://bcrypepfxxjmx" path="res://assets/background/oasisLonge.jpeg" id="2_iye7e"]
 
 [node name="Level1" instance=ExtResource("1_ooh8r")]
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_iye7e")
 
 [node name="LevelTimer" parent="." index="7"]
 wait_time = 30.0

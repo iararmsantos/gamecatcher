@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ImageFilesList" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Classes/ImageFilesList.cs" id="1_n0yrs"]
+
+[resource]
+script = ExtResource("1_n0yrs")
+FileNames = ["res://assets/gems/Black.png", "res://assets/gems/Blue.png", "res://assets/gems/Green.png", "res://assets/gems/Life.png", "res://assets/gems/Orange.png", "res://assets/gems/Purple.png", "res://assets/gems/Red.png", "res://assets/gems/Slow.png", "res://assets/gems/Super.png", "res://assets/gems/Yellow.png"]

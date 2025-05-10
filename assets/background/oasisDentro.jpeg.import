@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b182g56dj5nha"
-path="res://.godot/imported/element_red_diamond.png-cad5f9c3e4447126da2bf0c1c096c0b1.ctex"
+uid="uid://d1adcqp6l33a1"
+path="res://.godot/imported/oasisDentro.jpeg-a7b53cc63f68ed4b78d0364fe5579fb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gems/element_red_diamond.png"
-dest_files=["res://.godot/imported/element_red_diamond.png-cad5f9c3e4447126da2bf0c1c096c0b1.ctex"]
+source_file="res://assets/background/oasisDentro.jpeg"
+dest_files=["res://.godot/imported/oasisDentro.jpeg-a7b53cc63f68ed4b78d0364fe5579fb9.ctex"]
 
 [params]
 

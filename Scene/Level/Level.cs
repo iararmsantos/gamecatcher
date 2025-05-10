@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -78,10 +79,18 @@ public partial class Level : Node2D
 		//create new instance of gem
 		Gem gem = (Gem)_gemScene.Instantiate();
 		Rect2 viewportRect = GetViewportRect();
-		gem.SetSpeed(gem.GetSpeed());
-		
-		//add gem to scene
-		_gemsHolder.AddChild(gem);	
+
+        // Decide whether to spawn a special gem
+        bool spawnSpecial = ShouldSpawnSpecialGem();
+
+	    Gem.GemType randomType = spawnSpecial
+        ? GemUtils.GetRandomAnyGem()          // includes specials
+        : GemUtils.GetRandomSpawnableGem();   // only regular gems
+
+        Texture2D texture = ImageManager.GetTextureForType(randomType);
+        gem.Initialize(randomType, texture);
+
+		gem.SetSpeed(gem.GetSpeed());		
 
 		//randomize position of gem
 		float randomViewportRange = (float)GD.RandRange(viewportRect.Position.X + VIEWPORT_MARGIN, viewportRect.End.X - VIEWPORT_MARGIN);	
@@ -89,10 +98,8 @@ public partial class Level : Node2D
 		//change position of gem
 		gem.Position = new Vector2(randomViewportRange, -100);
 
-		// generate random gem types
-		Gem.GemType randomType = (Gem.GemType)GD.RandRange(0, System.Enum.GetValues(typeof(Gem.GemType)).Length - 1);
-	
-		gem.SetGemType(randomType);
+        //add gem to scene
+		_gemsHolder.AddChild(gem);
 
 		SignalManager.Instance.OnGemCollected += OnGemCollected;
 		
@@ -190,12 +197,10 @@ public partial class Level : Node2D
         // extra life
         if (lastCollectedGem.Type == Gem.GemType.Life)
         {
-            // make all bonus action happen
-            // GD.Print("Gem is Life");
-
             // Check if the Game node is still valid before accessing the Paddle node
             if (IsInstanceValid(this))
             {
+                GD.Print("Gem is Life");
                 LifeManager.IncrementLives();
             }
         }
@@ -261,4 +266,11 @@ public partial class Level : Node2D
     {
         return _lastCollectedGem;
     }
+
+    private bool ShouldSpawnSpecialGem()
+{
+    // Increase chance by 5% per level, max 50%
+    float chance = Mathf.Min(0.05f * ScoreManager.GetLevelSelected(), 0.5f);
+    return GD.Randf() < chance;
+}
 }
