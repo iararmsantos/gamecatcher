@@ -4,8 +4,6 @@ using Godot;
 
 public partial class Level : Node2D
 {
-	//static and readonly: to open imediately when the first instance of the class is created then it will never be loaded again
-	private static readonly AudioStream EXPLODE_SOUND = GD.Load<AudioStream>("res://assets/sound/explode.wav");
 	const double VIEWPORT_MARGIN = 50.0f;	
     //to spawn new gems
 	[Export] private PackedScene _gemScene;
@@ -53,10 +51,7 @@ public partial class Level : Node2D
 
     private void OnGameOver()
     {
-        _effect.Stop();
-
-		_effect.Stream = EXPLODE_SOUND;
-		_effect.Play();		
+        SoundManager.PlayExplosion(_effect);	
     }
 
     private void SpawnTimerHandler()
@@ -79,6 +74,9 @@ public partial class Level : Node2D
 		//create new instance of gem
 		Gem gem = (Gem)_gemScene.Instantiate();
 		Rect2 viewportRect = GetViewportRect();
+
+        //set wind
+        gem.SetWind(strength: 30f, frequency: 2f); // tweak values as desired
 
         // Decide whether to spawn a special gem
         bool spawnSpecial = ShouldSpawnSpecialGem();
@@ -117,7 +115,7 @@ public partial class Level : Node2D
         // Check if _effect is not null and is still valid before calling Play
         if (_effect != null && IsInstanceValid(_effect))
         {
-            _effect.Play();
+            SoundManager.PlayGemCatch(_effect);
         }
 		
         // increase level

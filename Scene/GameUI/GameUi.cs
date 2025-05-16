@@ -67,7 +67,7 @@ public partial class GameUi : Control
     {
         _levelCompleteLabel.Hide();
         _gameOverVBox.Show();
-		_gameOverSound.Play();
+		SoundManager.PlaySound(_gameOverSound, SoundManager.SOUND_GAME_OVER);
     }
 
 
@@ -75,7 +75,7 @@ public partial class GameUi : Control
     {		
 		_gameOverLabel.Hide();
         _gameOverVBox.Show();
-		_gameOverSound.Play();
+		SoundManager.PlaySound(_gameOverSound, SoundManager.SOUND_SUCCESS);
     }
 
 	public override void _Process(double delta)

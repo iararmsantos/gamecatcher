@@ -9,7 +9,6 @@ public partial class Gem : Area2D
 	private Sprite2D sprite;
 	private Texture2D _textureToApply;
 
-
 	public enum GemType
     {
         Red,
@@ -23,6 +22,12 @@ public partial class Gem : Area2D
 		Slow     
     }
     public GemType Type { get; private set; }
+
+	//Wind properties
+	private Vector2 velocity = new Vector2(0, 90); // Default fall speed
+	private float windStrength = 0.0f;             // X-axis wind force
+	private float windFrequency = 1.0f;            // How often the wind oscillates
+	private float windPhase = 0.0f;                // Used for sin curve variation
 
 
 	public void Initialize(GemType type, Texture2D texture)
@@ -63,6 +68,15 @@ public partial class Gem : Area2D
 		//The object moves downward (if _speed is positive) or upward (if _speed is negative)
 		Position += new Vector2(0, fallSpeed * (float)delta);
 		CheckHitBottom();
+
+		// Applying wind movement
+		float t = (float)Time.GetTicksMsec() / 1000.0f;
+
+		// Apply wind movement (oscillating left/right using sine wave)
+		float windOffset = windStrength * Mathf.Sin(windFrequency * t + windPhase);
+
+		Vector2 movement = new Vector2(windOffset, velocity.Y);
+		Position += movement * (float)delta;
 	}
 
 	/// <summary>
@@ -139,4 +153,13 @@ public partial class Gem : Area2D
     {
         return type == GemType.Super || type == GemType.Life || type == GemType.Slow;
     }
+
+	// Method to set wind behavior
+	public void SetWind(float strength, float frequency)
+	{
+		windStrength = strength;
+		windFrequency = frequency;
+		windPhase = (float)GD.RandRange(0, Mathf.Tau); // Random phase per gem
+	}
+
 }
